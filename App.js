@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from "react-navigation";
+import SearchScreen from "./src/screens/SearchScreen";
+import { createStackNavigator } from "react-navigation-stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const navigator = createStackNavigator(
+  {
+    Search: SearchScreen,
   },
-});
+  {
+    initialRouteName: "Search",
+    defaultNavigationOptions: {
+      // Some options we want for every different screen
+      // In general, we can use this to customize the header on different screen
+      title: "Business Search",
+    },
+  }
+);
+
+export default createAppContainer(navigator);
+// Anything exported by App.js will be automatically displayed on screen by react-native. So always have to expose some component from this file.
+// But we dont have any component in this file.
+// createAppContainer will create a default (react) component and displays whatever content navigator is producing
