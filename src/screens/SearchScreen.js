@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import SearchBar from "../components/SearchBar";
+import LocationBar from "../components/LocationBar";
 import ResultsList from "../components/ResultsList";
 import useRestaurants from "../hooks/useRestaurants";
 import { FlatList } from "react-native-gesture-handler";
@@ -8,6 +9,7 @@ import { FlatList } from "react-native-gesture-handler";
 // const SearchScreen = ({ navigation }) => {
 const SearchScreen = () => {
   const [term, setTerm] = useState("");
+  const [location, setLocation] = useState("New York");
   const [searchApi, results, status, errorMsg] = useRestaurants();
 
   const filterResultsByPrice = (price) => {
@@ -23,9 +25,16 @@ const SearchScreen = () => {
       <SearchBar
         term={term}
         onTermChange={setTerm}
-        onTermSubmit={() => searchApi(term)}
+        onTermSubmit={() => searchApi(term, location)}
       />
-      {errorMsg ? <Text style={{ color: "red" }}>{errorMsg}</Text> : null}
+      <LocationBar
+        location={location}
+        onLocationChange={setLocation}
+        onLocationSubmit={() => searchApi(term, location)}
+      />
+      {errorMsg ? (
+        <Text style={{ color: "red", marginLeft: 15 }}>{errorMsg}</Text>
+      ) : null}
       {status ? <Text style={{ marginLeft: 15 }}>{status}</Text> : null}
       {/* <Text>{status}</Text> */}
       <ScrollView>

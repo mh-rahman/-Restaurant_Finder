@@ -1,20 +1,20 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
+const LocationBar = ({ location, onLocationChange, onLocationSubmit }) => {
   return (
     <View style={styles.background}>
       {/* <Feather name="search" size={30} /> */}
-      <MaterialCommunityIcons name="food" style={styles.iconStyle} />
+      <Entypo name="location" style={styles.iconStyle} />
       <TextInput
         style={styles.inputStyle}
-        placeholder="Search"
+        placeholder="New York"
         autoCorrect={false}
-        autoCapitalize="none"
-        value={term}
-        onChangeText={onTermChange}
-        onEndEditing={onTermSubmit}
+        autoCapitalize="words"
+        value={location}
+        onChangeText={onLocationChange}
+        onEndEditing={onLocationSubmit}
       />
     </View>
   );
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   iconStyle: {
-    fontSize: 30,
+    fontSize: 24,
     alignSelf: "center",
     marginHorizontal: 15,
   },
 });
 
-export default SearchBar;
+export default LocationBar;

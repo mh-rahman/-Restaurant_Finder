@@ -6,14 +6,15 @@ export default () => {
   const [status, setStatus] = useState("Enter Search Query");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const searchApi = async (searchTerm) => {
+  const searchApi = async (searchTerm, location) => {
     setStatus("Searching");
     try {
       const response = await yelp.get("/search", {
         params: {
           limit: 50,
           term: searchTerm,
-          location: "New York",
+          // location: "New York",
+          location: location,
         },
       });
       setResults(response.data.businesses);
@@ -22,6 +23,7 @@ export default () => {
     } catch (err) {
       setErrorMsg("Something went wrong. Please try later.");
       console.log(err);
+      setStatus("");
     }
   };
 
